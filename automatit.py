@@ -20,4 +20,22 @@ def test3():
   print("Response text:", r.json())
 
 
-test3()
+from lxml import html
+import requests
+def test4():
+  page = requests.get('https://github.com/pricing/')
+  tree = html.fromstring(page.content)
+  print("Page Object:", tree)
+  plans = tree.xpath('//h2[@class="pricing-card-name alt-h3"]/text()')
+  pricing = tree.xpath('//span[@class="defaultcurrency"]/text()')
+  print("Plans:", plans, "\nPricing:", pricing)
+
+def test5():
+  import bs4
+  myfile = open('automatit.html')
+  soup = bs4.BeautifulSoup(myfile, "lxml") #Making the soup
+  print "BeautifulSoup Object:", type(soup)
+
+
+
+test5()
