@@ -45,6 +45,11 @@ def test5():
   #Find Elements by css print
   soup.select('.wow')
 
+  print "Facebook URL:", soup.find_all('a')[0]['href']
+  print "Inventor:", soup.find('div', {"id":"inventor"}).text
+  print "Span content:", soup.select('span')[0].getText()
+
+
 
 
 
