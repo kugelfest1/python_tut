@@ -36,6 +36,16 @@ def test5():
   soup = bs4.BeautifulSoup(myfile, "lxml") #Making the soup
   print "BeautifulSoup Object:", type(soup)
 
+  #Find Elements By tags
+  print soup.find_all('a')
+  print soup.find_all('strong')
+  #Find Elements By id
+  print soup.find('div', {"id":"inventor"})
+  print soup.select('#inventor')
+  #Find Elements by css print
+  soup.select('.wow')
+
+
 
 
 test5()
