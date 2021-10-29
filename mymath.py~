@@ -7,7 +7,7 @@ def test():
         eq='%d %c %d %c %d %c %d' %(rr(10), op[rr(3)], rr(10), op[rr(3)], rr(10), op[rr(3)], rr(10))
         res=input('What is %s ? (<enter> to exit) ' %(eq))
         if res=='': break
-        print('Correct' if abs(eval(eq)-int(res))<0.1 else 'Wrong, the correct answer is %d' %(eval(eq)))
+        print('Correct' if abs(eval(eq)-res)<0.1 else 'Wrong, the correct answer is %d' %(eval(eq)))
     return None
 
 test()
