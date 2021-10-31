@@ -57,6 +57,7 @@ def test6():
   ## Download paramters
   image_type = "Project"
   movie = "Avatar"
+  movie = "avengers"
   url = "https://www.google.com/search?q="+movie+"&source=lnms&tbm=isch"
 
   header = {'User-Agent': 'Mozilla/5.0'}
