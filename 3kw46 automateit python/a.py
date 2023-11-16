@@ -43,4 +43,5 @@ def test5():
     pricing2=pricing[1:6:2] # take the first 3 odd elements, which correspond to the plan prices..
     print("Plans:",plans, "\nPricing:",pricing2)
 
+
 test5()
