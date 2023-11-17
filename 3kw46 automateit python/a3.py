@@ -12,10 +12,11 @@ def test():
     url="https://www.google.com/search?q="+movie+"&source=lnm&tbm=isch"
     header={'User-Agent':'Mozilla/5.0'}
     soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=header)))
+
+    # find all img elements from the soup which contain "gstatic.com" and save the "src" attribute for each of these img elements, up to 5 times.
     images=[a['src'] for a in soup.find_all("img",{"src":re.compile("gstatic.com")})[:5]]
     for img in images:
         print "Image Source:",img
-    for img in images:
         raw_img=urllib2.urlopen(img).read()
         cntr=len([i for i in os.listdir(".") if image_type in i]) + 1
         f = open(image_type + "_"+str(cntr)+".jpg",'wb')
