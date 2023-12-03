@@ -90,11 +90,11 @@ def test3a():
 # scrape all zip urls under 'https://myrient.erista.me/files/Redump/'
 def test3b():
     global HEADER
-#    url='https://myrient.erista.me/files/No-Intro/'
-    url='https://myrient.erista.me/files/Redump/'
+    url='https://myrient.erista.me/files/No-Intro/'
+#    url='https://myrient.erista.me/files/Redump/'
     try:
-#        f=open("nointro.txt","w",buffering=0)    # unbuffered
-        f=open("redump.txt","w",buffering=0)    # unbuffered
+        f=open("nointro.txt","w",buffering=0)    # unbuffered
+#        f=open("redump.txt","w",buffering=0)    # unbuffered
         soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=HEADER)),features="lxml")
         ls=soup.find_all("table",{"id":"list"})
         # find all 'a' elements which contain a nonempty "title" attribute
@@ -125,4 +125,82 @@ def test3b():
 
     f.close()
 
-test3b()
+def myrient_scraper(url,res):
+    global HEADER
+    try:
+        f=open(res,"w",buffering=0)    # unbuffered
+        soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=HEADER)),features="lxml")
+        ls=soup.find_all("table",{"id":"list"})
+        # find all 'a' elements which contain a nonempty "title" attribute
+        rigs=ls[0].find_all("a",{"title":re.compile("\w")})
+        for i in rigs:
+    #        print(i.get('href'),i.get('title'))
+    #        print(i.get('href'))
+            url2=url+i.get('href')
+            sys.stdout.write(i.get('title'))
+
+            # try max x times
+            for i in range(5):
+                try:
+                    soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url2,headers=HEADER)),features="lxml")
+                    # find all 'a' elements which contain a nonempty "title" attribute
+                    zz=soup.find_all("a",{"title":re.compile("\w")})
+                    for i in zz:
+                        f.write(url2+i.get('href')+'\n')
+                        sys.stdout.write('.')
+                except:
+                    sys.stdout.write("-%-retrying.. \n")
+                    time.sleep(2**i)
+                    continue
+                break
+    #        print('-'*80)
+    except:
+        sys.stdout.write("-%-buggered\n")
+
+    f.close()
+
+def myrient_scraper_stats(url,res):
+    global HEADER
+    try:
+        f=open(res,"w",buffering=0)    # unbuffered
+        f2=open("stat"+res,"w",buffering=0)    # unbuffered
+        soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=HEADER)),features="lxml")
+        ls=soup.find_all("table",{"id":"list"})
+        # find all 'a' elements which contain a nonempty "title" attribute
+        rigs=ls[0].find_all("a",{"title":re.compile("\w")})
+        for i in rigs:
+    #        print(i.get('href'),i.get('title'))
+    #        print(i.get('href'))
+            url2=url+i.get('href')
+            sys.stdout.write(i.get('title'))
+
+            # try max x times
+            for j in range(5):
+                try:
+                    soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url2,headers=HEADER)),features="lxml")
+                    # find all 'a' elements which contain a nonempty "title" attribute
+                    zz=soup.find_all("a",{"title":re.compile("\w")})
+                    for k in zz:
+                        f.write(url2+k.get('href')+'\n')
+                        f2.write("%s,%s,%s\n" % (url,i.get('title'),k.get('title')))
+                        sys.stdout.write('.')
+                except:
+                    sys.stdout.write("-%-retrying.. \n")
+                    time.sleep(2**j)
+                    continue
+                break
+    #        print('-'*80)
+    except:
+        sys.stdout.write("-%-buggered\n")
+
+    f.close()
+    f2.close()
+
+def test3c():
+    jobs={ 'https://myrient.erista.me/files/No-Intro/': 'nointro.txt',
+        'https://myrient.erista.me/files/Redump/': 'redump.txt'
+    }
+    for k,v in jobs.items():
+        myrient_scraper_stats(k,v)
+
+test3c()
