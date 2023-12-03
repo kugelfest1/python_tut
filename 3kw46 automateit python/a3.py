@@ -23,4 +23,23 @@ def test():
         f.write(raw_img)
         f.close()
 
-test()
+# experiment with scraping https://myrient.erista.me/files/Redump/..
+# 2023-12-03
+def test2():
+    url='https://myrient.erista.me/files/Redump/'
+    header={'User-Agent':'Mozilla/5.0'}
+    soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=header)),features="lxml")
+    ls=soup.find_all("table",{"id":"list"})
+    # find all 'a' elements which contain a nonempty "title" attribute
+    rigs=ls[0].find_all("a",{"title":re.compile("\w")})
+    for i in rigs:
+        print(i.get('href'),i.get('title'))
+
+    print('-'*80)
+    
+    # scrape list from each rig element..
+    for i in rigs:
+        url2=url+i.get('href')
+        print(url2)
+
+test2()

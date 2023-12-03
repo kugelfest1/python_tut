@@ -24,4 +24,11 @@ def test2():
     print("Inventor:",soup.find('div',{'id':'inventor'}).text)
     print("Span content:", soup.select('span')[0].getText())
 
-test2()
+# experiment with scraping https://myrient.erista.me/files/Redump/
+# 20223-12-03
+def test3():
+    url=open('https://myrient.erista.me/files/Redump/')
+    soup=bs4.BeautifulSoup(url,"lxml")
+
+test3()    
+

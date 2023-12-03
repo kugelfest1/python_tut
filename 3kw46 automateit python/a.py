@@ -43,5 +43,14 @@ def test5():
     pricing2=pricing[1:6:2] # take the first 3 odd elements, which correspond to the plan prices..
     print("Plans:",plans, "\nPricing:",pricing2)
 
+# experiment with scraping https://myrient.erista.me/files/Redump/
+# 23-12-03
+def myrient():
+    page=requests.get('https://myrient.erista.me/files/Redump')
+    tree=html.fromstring(page.content)
+    print(tree)
+    rig=tree.xpath('//td[@class="link"]/text()')
+    print("rig:",rig)
 
-test5()
+
+myrient()
