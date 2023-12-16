@@ -1,4 +1,6 @@
-# concord.py
+# concord.py: return a concordance of a list
+# usage: cat list | py -2 concord.py
+# example: awk -F'\t' '{print $2}' nointro2.txt | py -2 concord.py
 # 2023-12-07
 import sys
 
