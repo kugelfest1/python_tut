@@ -12,7 +12,8 @@ Link_URL='https://gist.github.com'
 username='kugelfest1'
 api_token='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'
 header={'X-Github-Username': '%s' % username,
-        'Content-type': 'application/json',
+        'Content-type': 'application/c
+        ',
         'Authorization': 'token %s' % api_token,
         }
 gist_id=''

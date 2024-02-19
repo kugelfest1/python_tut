@@ -35,6 +35,7 @@ def test2():
     image_type="Project"
     movie="avatar"
     url="https://www.google.com/search?q="+movie+"&source=lnm&tbm=isch"
+    url="https://www.google.com/search?q=avatar&source=lnm&tbm=isch"
     header={'User-Agent':'Mozilla/5.0'}
     soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url,headers=header)),"lxml")
 
@@ -52,6 +53,14 @@ def test2():
         f.write(raw_img)
         f.close()
 
+def test3():
+    url="https://www.immobilienscout24.de/Suche/radius/wohnung-mieten?centerofsearchaddress=M%C3%BCnchen;81829;;;;;&geocoordinates=48.13185;11.6785;5.0&enteredFrom=one_step_search"
+    header={'User-Agent':'Mozilla/5.0'}
+    soup=BeautifulSoup(urllib2.urlopen(urllib2.Request(url,headers=header)),"lxml")
+    print(soup)
+
+
 #test()
-test2()
+#test2()
+test3()
 
