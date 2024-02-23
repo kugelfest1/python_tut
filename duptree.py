@@ -19,11 +19,9 @@ def test8():
     ar=[re.sub(r'^.:', args.outdir, li) for li in ar if not li.endswith(r'\\')]  # discard dirs, and substitute the drive prefix with the output dir for the rest
     dirs=set([os.path.split(li)[0] for li in ar])   # use set to discard duplicates
 #    print("\n".join(dirs))
-    [os.path.exists(dir) or os.makedirs(dir) for dir in dirs]
-#    [open(li,"w").close() for li in ar]
-    [open(li,"w") for li in ar]     # FIXME no close()?
+    [os.path.exists(dir) or os.makedirs(dir) for dir in dirs]   # FIXME need exception handling for invalid filenames
+    [open(li,"w").close() for li in ar]
     args.verbose and print("\n".join(ar))
 
 
 test8()
-
