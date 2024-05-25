@@ -16,7 +16,7 @@ def test8():
     args.verbose and print("Building %s from %s .." % (args.outdir,args.file))
     f=open(args.file,'r', encoding='UTF8')
     ar=set([li.strip() for li in f.readlines()] )    # discard trailing newlines
-    ar=[re.sub(r'^.:', args.outdir, li) for li in ar if not li.endswith(r'\\')]  # discard dirs, and substitute the drive prefix with the output dir for the rest
+    ar=[re.sub(r'^.:', args.outdir, li) for li in ar if not li.endswith('\\')]  # discard dirs, and substitute the drive prefix with the output dir for the rest
     dirs=set([os.path.split(li)[0] for li in ar])   # use set to discard duplicates
 #    print("\n".join(dirs))
     [os.path.exists(dir) or os.makedirs(dir) for dir in dirs]   # FIXME need exception handling for invalid filenames
